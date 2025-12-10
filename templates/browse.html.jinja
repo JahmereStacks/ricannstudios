@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="/static/style.css">
+  </head>
+  <body class="bg-gray-300">
+   {%  include "components/navbar.html.jinja"  %}
+
+  <div class="flex justify-center">
+        <h1 class="text-3xl font-bold p-6 m-2 "> Products !</h1>
+  </div>
+
+<main class="max-w-7xl mx-auto px-4 py-10">
+
+ 
+  <h1 class="text-2xl font-light  tracking-wide text-gray-800 mb-8">
+    Our Collection
+  </h1>
+
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+
+    {% for x in products %}
+    <div class="group">
+
+    
+      <div class="overflow-hidden rounded-xl shadow-sm">
+        <img
+          src="{{ x['Image'] }}"
+          alt="{{ x['Name'] }}"
+          class="w-full h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+      </div>
+
+    
+      <div class="mt-4 space-y-1">
+        <p class="text-lg font-light tracking-wide text-gray-900">
+          {{ x["Name"] }}
+        </p>
+
+        <p class="text-base font-light text-gray-600">
+          ${{ x["Price"] }}
+        </p>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+</main>
+
+
+
+
+   <footer class="lux-footer" style="text-align:center;">
+    <p>© 2025 — Created with purpose.</p>
+</footer>
+
+  </body>
+</html>
