@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-300">
+    {%  include "components/navbar.html.jinja"  %}
+
+
+    <div class="mt-12"></div>
+
+
+ <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+  <div>
+    <div class="space-y-4">
+      <img 
+        src="{{ product['Image'] }}"
+        class="rounded-md shadow-sm h-130 m-2"
+      />
+    </div>
+
+    <h1 class="text-3xl font-bold  mb-2 m-2">
+      {{ product['Name'] }}
+    </h1>
+
+    <div class="text-2xl font-medium m-2">
+      <h3>{{ product['Price'] }}</h3>
+    </div>
+  </div>
+
+
+  <div class="flex flex-col items-center text-center space-y-6">
+
+
+    <h1 class="text-2xl font-bold m-2 justify-center">
+    Description
+    </h1>
+
+    <p class="text-neutral-700  max-w-sm  m-8 ">
+      {{ product['Description'] }}
+    </p>
+
+    <button 
+      class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
+             hover:bg-red-500 transition-colors cursor-pointer "
+    >
+      Add to Cart
+    </button>
+
+    <button 
+      class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
+             hover:bg-red-500 transition-colors cursor-pointer "
+    >
+      Checkout
+    </button>
+
+    
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="max-w-screen-xl mx-auto px-6 lg:px-10 mt-20">
+
+  <h2 class="text-2xl font-light tracking-wide mb-10">
+    You May Also Like
+  </h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
+
+    {% for x in products %}
+    <a href="/product/{{ item['ID'] }}" class="group block">
+
+      <div class="aspect-square overflow-hidden rounded-lg bg-gray shadow-sm">
+        <img 
+          src="{{ item['Image'] }}" 
+          class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+        />
+      </div>
+
+      <h3 class="mt-4 text-lg font-light tracking-wide">
+        {{ item['Name'] }}
+      </h3>
+
+      <p class="text-neutral-700 text-sm">
+        {{ item['Price'] }}
+      </p>
+
+    </a>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+  </body>
+</html>
