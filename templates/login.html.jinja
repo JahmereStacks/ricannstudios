@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-gray-300">
+
+    
+    <div class="fixed top-0 left-0 w-full z-50">
+      {% include "components/navbar.html.jinja" %}
+    </div>
+
+    
+    <div class="flex flex-col items-center justify-start pt-32 px-6">
+
+      
+      <div class="mb-6">
+        <img src="/static/product/logo.png" alt="Logo" class="h-30 w-auto opacity-90">
+      </div>
+
+    
+      <div class="text-center mb-10 max-w-xl">
+        <h1 class="text-4xl font-bold tracking-tight">
+          Welcome Back to RicannStudios
+        </h1>
+
+        <p class="text-gray-600 mt-4 text-lg">
+          Log in to access premium COD & Fortnite accounts, exclusive deals,  
+          and your personalized Ricann experience.
+        </p>
+      </div>
+
+    
+      <div class="bg-white p-10 rounded-lg shadow-md w-full max-w-md">
+
+        <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
+
+        <form>
+          <label class="block mb-4">
+            <span class="text-gray-700">Email</span>
+            <input type="email" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
+          </label>
+
+          <label class="block mb-6">
+            <span class="text-gray-700">Password</span>
+            <input type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
+          </label>
+
+          <button class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-900 transition">
+            Login
+          </button>
+        </form>
+
+        <p class="text-center mt-6 text-sm">
+          Don’t have an account?
+          <a href="/register" class="text-blue-600 hover:underline">Register here</a>
+        </p>
+
+      </div>
+
+      <div class="pb-20"></div>
+
+    </div>
+
+
+
+    <footer class="lux-footer" style="text-align:center;">
+    <p>© 2025 — Created with purpose.</p>
+</footer>
+
+  </body>
+</html>

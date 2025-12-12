@@ -1,34 +1,97 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body class="bg-gray-300">
-    {%  include "components/navbar.html.jinja"  %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
 
-     <div class="flex justify-center">
-        <h1 class="text-3xl font-bold p-6 m-2 ">
-      RicannStudios
-        </h1>
+<body class="bg-gray-300 text-neutral-900">
+
+
+  {% include "components/navbar.html.jinja" %}
+
+
+  <div class="w-full bg-black text-white text-center py-3 text-sm tracking-wide">
+    **Exclusive Leak Code: RICANN10 — Get 60% Off All Items**
+  </div>
+
+
+  <div class="w-full flex items-center justify-between px-8 py-6">
+
+
+    <img src="/static/product/logo.png" alt="Logo" class="h-30 w-auto">
+
+  
+    <a href="/cart" 
+       class="text-sm font-medium tracking-wide bg-black text-white px-5 py-2 rounded-md hover:bg-red-500 transition">
+      Cart
+    </a>
+
+  </div>
+
+
+  <section class="max-w-screen-xl mx-auto px-6 lg:px-10 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+    <div class="flex flex-col justify-center space-y-6">
+      
+      <h1 class="text-5xl font-light tracking-wide leading-tight">
+        Discover a New Level<br>of Elite Gaming Power
+      </h1>
+
+      <p class="text-neutral-700 text-lg max-w-lg">
+        Unlock premium COD & Fortnite accounts tailored for true competitors.
+        Hand-selected, loaded, and exclusively available to members of Ricann Studios.
+      </p>
+
+      <a href="/browse" 
+         class="bg-black text-white px-8 py-3 w-max rounded-md tracking-wide text-sm hover:bg-red-500 transition">
+        Shop Now
+      </a>
+    </div>
+
+    <div>
+      <img src="/static/product/hero.jpeg" class="rounded-lg shadow-lg w-full object-cover">
+    </div>
+
+  </section>
+
+  
+  <section class="max-w-screen-xl mx-auto px-6 lg:px-10 py-20">
+
+    <h2 class="text-3xl font-light tracking-wide mb-10">Featured Accounts</h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-12">
+
+      {% for item in products %}
+      <a href="/product/{{ item['ID'] }}" class="group block">
+
+        <div class="rounded-lg overflow-hidden shadow-sm bg-white">
+          <img src="{{ item['Image'] }}" 
+               class="w-full h-64 object-cover group-hover:scale-105 transition duration-300">
         </div>
 
+        <h3 class="mt-4 text-lg font-light tracking-wide">
+          {{ item['Name'] }}
+        </h3>
 
-         <p class="font-serif text-lg p-4 mx-8 text-center" style="font-family: 'Lora', serif;">
-        El Ricann at your service, providing you with the best loaded COD and Fortnite accounts, and endless motivation aligning with your goals. (LOGO above this!)
-    </p>
-    
+        <p class="text-neutral-700 text-sm">
+          {{ item['Price'] }}
+        </p>
 
-     <div class="absolute top-85 right-8 text-white bg-black py-2 px-4 rounded-md text-lg font-semibold">
-            Discount Code: <span class="text-red-500">Ricann</span>
-        </div>
+      </a>
+      {% endfor %}
 
-<div class="absolute top-100 right-8 mb-8 ml-8">
-            <a href="/cart" class="bg-gray-500 text-gray py-3 px-8 rounded-full text-xl font-semibold hover:bg-red-500 transition-colors">
-                Go to Cart
-            </a>
-        </div>
+    </div>
 
-  </body>
+  </section>
+
+  <div class="py-20"></div>
+
+
+  <footer class="lux-footer" style="text-align:center;">
+    <p>© 2025 — Created with purpose.</p>
+</footer>
+
+</body>
 </html>

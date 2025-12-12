@@ -54,3 +54,11 @@ def product_page(product_id):
     return render_template("product.html.jinja", product=result)
     
 
+@app.route("/login")
+def login():
+    return render_template("login.html.jinja")
+
+@app.route("/register")
+def register():
+    return render_template("register.html.jinja")
+
