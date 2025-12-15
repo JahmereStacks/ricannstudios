@@ -12,8 +12,11 @@
     <div class="fixed top-0 left-0 w-full z-50">
       {% include "components/navbar.html.jinja" %}
     </div>
+    
+
 
     <div class="flex flex-col items-center justify-start pt-32 px-6">
+
 
      
       <div class="mb-6 ">
@@ -33,41 +36,52 @@
         </p>
       </div>
 
+        {%for message in get_flashed_messages()%}
+      
+            <li>{{message}}</li>
+      
+     {%endfor%}
+
      
       <div class="bg-white p-10 rounded-lg shadow-md w-full max-w-md">
 
         <h2 class="text-2xl font-semibold mb-6 text-center">Register</h2>
 
-        <form>
+        <form method="post">
 
           <label class="block mb-4">
             <span class="text-gray-700">Name</span>
-            <input type="text" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
+            <input name="name" required type="text" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
           </label>
 
           <label class="block mb-4">
             <span class="text-gray-700">Email</span>
-            <input type="email" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
+            <input name="email" required type="email" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
           </label>
 
           <label class="block mb-4">
             <span class="text-gray-700">Password</span>
-            <input type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
+            <input  name="password"password required  type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
           </label>
 
           <label class="block mb-6">
             <span class="text-gray-700">Confirm Password</span>
-            <input type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
+            <input name="confirm_password" required type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
           </label>
 
-          <button class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-900 transition">
+          <label class="block mb-6">
+            <span class="text-gray-700">Address</span>
+            <input name="address" required type="text" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black" />
+          </label>
+
+          <button type ="submit" class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-900 transition">
             Create Account
           </button>
         </form>
 
         <p class="text-center mt-6 text-sm">
           Already have an account?
-          <a href="/login" class="text-blue-600 hover:underline">Login here</a>
+          <a href="/login" class="text-red-500 hover:underline">Login here</a>
         </p>
 
       </div>
