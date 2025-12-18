@@ -22,11 +22,12 @@
 
     <img src="/static/product/logo.png" alt="Logo" class="h-30 w-auto">
 
-  
+  {% if  current_user.is_authenticated %}
     <a href="/cart" 
        class="text-sm font-medium tracking-wide bg-black text-white px-5 py-2 rounded-md hover:bg-red-500 transition">
       Cart
     </a>
+{% endif %}
 
   </div>
 
@@ -48,6 +49,14 @@
          class="bg-black text-white px-8 py-3 w-max rounded-md tracking-wide text-sm hover:bg-red-500 transition">
         Shop Now
       </a>
+
+        {% if not current_user.is_authenticated %}
+       <a href="/register" 
+       class="text-sm font-medium tracking-wide bg-black text-white px-5 py-2 rounded-md hover:bg-red-500 transition">
+      Sign up here
+    </a>
+    {% endif %}
+
     </div>
 
     <div>

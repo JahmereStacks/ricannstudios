@@ -33,20 +33,26 @@
         </p>
       </div>
 
-    
+        {%for message in get_flashed_messages()%}
+      
+            <li>{{message}}</li>
+      
+     {%endfor%}
+
+     
       <div class="bg-white p-10 rounded-lg shadow-md w-full max-w-md">
 
         <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
 
-        <form>
+        <form method="post">
           <label class="block mb-4">
             <span class="text-gray-700">Email</span>
-            <input type="email" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
+            <input name="email" required type="email" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
           </label>
 
           <label class="block mb-6">
             <span class="text-gray-700">Password</span>
-            <input type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
+            <input name="password"password required  type="password" class="mt-1 block w-full p-3 border rounded-md focus:ring-black focus:border-black">
           </label>
 
           <button class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-900 transition">
