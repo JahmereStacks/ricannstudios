@@ -43,6 +43,10 @@
       {{ product['Description'] }}
     </p>
 
+<form method="post" action="/product/{{ product['ID'] }}/add_to_cart">
+
+    <label> Qty:</label>
+    <input type="number" name="qty" value="1" min="1" max="3">
     <button 
       class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
              hover:bg-red-500 transition-colors cursor-pointer "
@@ -50,6 +54,7 @@
       Add to Cart
     </button>
 
+</form>
     <button 
       class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
              hover:bg-red-500 transition-colors cursor-pointer "
