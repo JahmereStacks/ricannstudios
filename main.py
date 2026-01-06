@@ -121,6 +121,71 @@ def add_to_cart(product_id):
 
 
 
+@app.route("/cart")
+@login_required
+def cart():
+    connection = connect_db()
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT * FROM  `Cart`
+        JOIN `Product` ON `Product`.`ID` = `Cart`.`ProductID`
+        WHERE `UserID` = %s
+""", (current_user.id))
+    
+    results = cursor.fetchall()
+    
+    total = 0
+    
+    for x in results :
+        total += float(x["Price"]) * int(x["Quantity"])
+
+    connection.close()
+    
+    return render_template("cart.html.jinja", cart=results, total=total )
+
+
+@app.route('/cart/<product_id>/update_qty', methods=["POST"])
+@login_required
+def update_crt(product_id):
+    new_qty = request.form["qty"]
+
+    connection = connect_db()
+    cursor = connection.cursor()
+    
+    cursor.execute("""
+        UPDATE `Cart` 
+        SET `Quantity` = %s
+        WHERE `ProductID`=%s AND `UserID`=%s                                  
+""",(new_qty,product_id, current_user.id) )
+    
+    connection.close()
+    return redirect('/cart')
+
+
+@app.route('/cart/<item_id>', methods=['POST'])
+@login_required
+def remove_from_cart(item_id):
+    connection = connect_db()
+    cursor = connection.cursor()
+   
+    cursor.execute("""
+        DELETE FROM `Cart` WHERE `ProductID` = %s AND `UserID` = %s;
+    """, (item_id, current_user.id))
+    
+    connection.close()
+    return redirect('/cart')
+
+
+
+
+
+
+
+
+
+
 @app.route("/login",methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -205,3 +270,5 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html.jinja'), 404 
+
+
