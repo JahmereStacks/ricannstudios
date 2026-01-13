@@ -4,6 +4,8 @@ from flask_login import LoginManager, login_user, login_required, current_user
 
 from flask_login import logout_user 
 
+from datetime import datetime
+
 
 
 import pymysql
@@ -178,6 +180,87 @@ def remove_from_cart(item_id):
     return redirect('/cart')
 
 
+@app.route("/checkout", methods = ["POST", "GET"])
+@login_required
+def checkout():
+ 
+ connection = connect_db()
+ 
+ 
+ cursor = connection.cursor()
+ 
+ cursor.execute("""
+        SELECT * FROM  `Cart`
+        JOIN `Product` ON `Product`.`ID` = `Cart`.`ProductID`
+        WHERE `UserID` = %s
+""", (current_user.id))
+ 
+ results = cursor.fetchall()
+ 
+ if request.method == 'POST':
+
+    cursor.execute("INSERT INTO `Sale` (`UserID`) VALUES (%s)",(current_user.id))
+
+    sale = cursor.lastrowid
+    for item in results:
+        cursor.execute(""" 
+        INSERT INTO `SaleCart` 
+        (`ProductID`, `Quantity`, `SaleID`)
+         VALUES (%s,%s,%s)
+         """, (item['ProductID'], item['Quantity'], sale))
+        
+    
+    cursor.execute("DELETE FROM `Cart` WHERE `UserID` = %s", (current_user.id))
+
+
+
+    return redirect('/thanks')
+ 
+ total = 0
+ 
+ for x in results :
+        total += float(x["Price"]) * int(x["Quantity"])
+    
+ connection.close()
+    
+ return render_template("checkout.html.jinja", cart=results, total=total )
+
+
+
+
+
+@app.route("/thanks")
+def thanks():
+    return render_template("thanks.html.jinja")
+
+
+
+@app.route("/orders")
+@login_required
+def orders():
+    connection = connect_db()
+    cursor = connection.cursor()
+
+
+    cursor.execute("""
+    SELECT 
+        `Sale`.`ID`,
+        `Sale`.`Timestamp`,
+        `Sale`.`Status`,
+        SUM(`SaleCart`.`Quantity`) AS 'Quantity',
+        SUM(`SaleCart`.`Quantity` * `Product`.`Price`) AS 'Total'
+    FROM `Sale`
+    JOIN `SaleCart` ON `SaleCart`.`SaleID` = `Sale`.`ID`
+    JOIN `Product` ON `Product`.`ID` = `SaleCart`.`ProductID`
+    WHERE `Sale`.`UserID` = %s
+    GROUP BY `Sale`.`ID`;
+""", (current_user.id,))
+
+
+    orders = cursor.fetchall()
+    connection.close()
+
+    return render_template("orders.html.jinja", orders=orders)
 
 
 

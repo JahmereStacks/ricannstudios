@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50 text-black">
+
+{% include "components/navbar.html.jinja" %}
+
+<main class="max-w-6xl mx-auto px-4 py-12">
+     
+  <h1 class="text-3xl font-bold tracking-tight mb-10">Checkout</h1>
+
+  <form method="post" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+
+    <div class="lg:col-span-2 space-y-8">
+
+      <div class="bg-white p-6 border border-gray-200">
+        <h2 class="text-lg font-bold mb-4">Shipping</h2>
+        <div class="space-y-4">
+          <input required class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black" placeholder="Full Name">
+          <input required class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black" placeholder="Address">
+          <input required class="w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black" placeholder="City, State, ZIP">
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div class="bg-white p-6 border border-gray-200 h-fit space-y-6">
+
+      <h2 class="text-lg font-bold">Order Summary</h2>
+
+  
+      <div>
+        <label class="block text-sm font-medium mb-2">Discount Code</label>
+        <div class="flex gap-2">
+          <input
+            type="text"
+            placeholder="Enter code"
+            class="flex-1 border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
+          >
+          <button
+            type="button"
+            class="border border-black px-4 py-3 text-sm font-semibold hover:bg-black hover:text-white transition"
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-between text-sm">
+        <span>Subtotal</span>
+        <span>${{ total }}</span>
+      </div>
+
+      <div class="flex justify-between text-sm">
+        <span>Shipping</span>
+        <span>Free</span>
+      </div>
+
+      <div class="flex justify-between text-sm">
+        <span>Tax</span>
+        <span>$0.00</span>
+      </div>
+
+      <div class="flex justify-between font-bold text-base border-t pt-4">
+        <span>Total</span>
+        <span>${{ total }}</span>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-black text-white py-4 text-sm font-semibold tracking-wide hover:bg-gray-900 transition"
+      >
+        Place Order
+      </button>
+
+    </div>
+
+  </form>
+</main>
+
+</body>
+</html>
+
+
