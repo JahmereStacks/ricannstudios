@@ -74,16 +74,10 @@
 
 
 
-
-<div class="max-w-screen-xl mx-auto px-6 lg:px-10 mt-20">
-
-  <h2 class="text-2xl font-light tracking-wide mb-10">
-    You May Also Like
-  </h2>
-
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
 
-    {% for x in products %}
+   
+    {% for item in products %}
     <a href="/product/{{ item['ID'] }}" class="group block">
 
       <div class="aspect-square overflow-hidden rounded-lg bg-gray shadow-sm">
@@ -106,9 +100,84 @@
 
   </div>
 
+
+<div class="mt-12 bg-gray-500 rounded-md shadow p-6 max-w-lg mx-auto">
+
+  <h2 class="text-xl font-bold mb-4">Leave a Review</h2>
+
+  <form method="post" action="/product/{{ product['ID'] }}/add_review" class="space-y-4">
+
+    <input type="text" name="user" placeholder="Your name"required class="w-full border rounded px-3 py-2" >
+
+    <select  name="rating"  required class="w-full border rounded px-3 py-2">
+      <option value="">Rating</option>
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+
+    <textarea 
+      name="comment" 
+      placeholder="Write your review..."
+      required
+      class="w-full border rounded px-3 py-2"
+    ></textarea>
+
+    <button 
+      class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-red-500 transition"
+    >
+      Submit Review
+    </button>
+
+  </form>
 </div>
 
 
+<div class="mt-16 max-w-2xl mx-auto">
+
+  <h2 class="text-2xl font-bold mb-6">Customer Reviews</h2>
+
+  {% if reviews %}
+    <div class="space-y-6">
+      {% for review in reviews %}
+        <div class="bg-gray-200 rounded-md shadow p-4">
+
+          <h4 class="font-semibold mb-1">
+            {{ review['UserName'] }}
+          </h4>
+
+          <div class="text-yellow-500 mb-2">
+            {{ "⭐" * review['Rating'] }}
+          </div>
+
+          <p class="text-black">
+            {{ review['Comments'] }}
+          </p>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-neutral-600">No reviews yet. Be the first!</p>
+  {% endif %}
+
+</div>
+
+
+
+
+
+
+
+<div class="max-w-screen-xl mx-auto px-6 lg:px-10 mt-20">
+
+  <h2 class="text-2xl font-light tracking-wide mb-10">
+    You May Also Like
+  </h2>
+
+</div>
 
 <footer class="lux-footer" style="text-align:center;">
     <p>© 2025 — Created with purpose.</p>
