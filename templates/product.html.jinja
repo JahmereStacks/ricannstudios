@@ -38,6 +38,24 @@
     <h1 class="text-2xl font-bold m-2 justify-center">
     Description
     </h1>
+ 
+ {% if reviews %}
+  <div class="flex items-center gap-2 mt-2">
+  <p>Average Rating - </p>
+    <div class="text-yellow-500 text-lg">
+      {{ "⭐" * avg_rating|int }}
+    </div>
+    <span class="text-sm text-gray-700">
+      {{ avg_rating }}/5
+    </span>
+  </div>
+{% else %}
+  <p class="text-gray-500 mt-2">
+    No reviews yet
+  </p>
+{% endif %}
+
+
 
     <p class="text-neutral-700  max-w-sm  m-8 ">
       {{ product['Description'] }}
@@ -51,18 +69,11 @@
       class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
              hover:bg-red-500 transition-colors cursor-pointer "
     >
-      Add to Cart
+      Add to Cart 🛒
     </button>
 
 </form>
-<a href="/checkout">
-    <button 
-      class="bg-gray-200 text-black py-2 px-6 text-sm font-bold  rounded-md 
-             hover:bg-red-500 transition-colors cursor-pointer "
-    >
-      Checkout
-    </button>
-</a>
+
     
 
   </div>

@@ -109,7 +109,15 @@ def product_page(product_id):
         (product_id,)
     )
     reviews = cursor.fetchall()
+    
+    total_rating = 0
+    avg_rating = 0           
 
+
+    for r in reviews:
+        total_rating += int(r["Rating"])
+
+        avg_rating = round(total_rating / len(reviews), 1) if reviews else 0
 
     connection.close()
 
@@ -117,7 +125,7 @@ def product_page(product_id):
     if result is None:
         abort(404)
 
-    return render_template("product.html.jinja", product=result,  reviews=reviews)
+    return render_template("product.html.jinja", product=result,  reviews=reviews, avg_rating=avg_rating )
 
 
 @app.route("/product/<product_id>/add_review", methods=["POST"])
